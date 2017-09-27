@@ -1,6 +1,5 @@
 <?php
 $q=session_save_path("c:\\websites\\2017-projects\\team2\\sess\\");
-echo $q;
 
 session_start();
 
@@ -18,29 +17,10 @@ if(!$mysqli){
 }
 
 //query to get data from the table
-$query = sprintf("SELECT total_transacted,outlet,outlet_id FROM ip17team2db.totals WHERE end_date = (Select Max(end_date) from ip17team2db.totals) ORDER BY total_transacted DESC");
+$query = sprintf("SELECT total_transacted,outlet FROM ip17team2db.totals WHERE end_date = (Select Max(end_date) from ip17team2db.totals)");
 
 //execute query
 $result = mysqli_query($mysqli, $query);
-
-//loop through the returned data
-
-
-/*
-if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-        foreach($row as $r){
-            if($r){
-            echo $r;
-            echo "<br>" ;
-            }
-        }
-    }
-} else {
-    echo "0 results";
-}
-*/
 
 
 $_SESSION['data'] = $result;

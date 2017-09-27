@@ -75,8 +75,31 @@ function handleDrop(e) {
         var arr = fixdata(data);
         workbook = XLSX.read(btoa(arr), {type: 'base64'});
       }
-      var parsedData= JSON.parse(workbook)
-      console.log(parsedData[50]);
+
+      var trans = workbook["Sheets"]["List of transactions"];
+      
+      
+      var dataArray = [];
+        for (var key in trans) {
+            dataArray.push(trans[key]["v"]);         // Push the key on the array
+        }
+      console.log(dataArray);
+
+      var arrayOfDates = [];
+        for(var i = 0; i<dataArray.length;i++){
+            if(dataArray[i]){
+                if(typeof dataArray[i] === "string"){
+                    if(dataArray[i].indexOf("/") >=0){
+                        console.log(dataArray[i] + " " + dataArray[i+1] + " " + dataArray[i+2] + " " + dataArray[i+3] + " " + dataArray[i+4] + " " + dataArray[i+5] + " " + dataArray[i+6] + " " + dataArray[i+7] + " " + dataArray[i+8] + " " +dataArray[i+9] + " " );
+                        arrayOfDates.push(dataArray[i]);
+                    }
+                }
+            }
+        }
+    
+    console.log(arrayOfDates);
+      
+      
 
       /* DO SOMETHING WITH workbook HERE */
     };
